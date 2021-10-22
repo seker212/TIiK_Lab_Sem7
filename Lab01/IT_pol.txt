@@ -1,0 +1,70 @@
+Po krótkim osłabieniu spowodowanym przez pandemię wydatki na centra danych zaczęły się zwiększać ze zdwojoną siłą, co widać zarówno w Polsce, jak i na świecie. Jest to wynikiem systematycznego wzrostu zapotrzebowania na moc przetwarzania związanego z cyfryzacją firm i instytucji.
+
+Optymalizacja i automatyzacja procesów w centrum danych stanowią integralną część inicjatyw cyfrowej transformacji. Pandemia Covid-19 spowodowała, że wiele firm zaczęło doceniać znaczenie automatyzacji, a wizja cyfrowych centrów danych wykorzystujących sztuczną inteligencję i zdolnych do samonaprawy zaczęła budzić większe niż dotąd zainteresowanie. Dlatego już w najbliższych latach na poziom tych wydatków wpływ będą miały zastosowania mechanizmów sztucznej inteligencji. AI bardziej kojarzy się z autonomicznymi pojazdami lub robotami, ale zbliża się czas, gdy idea autonomicznych, samozarządzających się data centers zacznie nabierać realnych kształtów. A ponieważ inwestycje w budowę centrów przetwarzania danych są planowane na 10 lub więcej lat, warto wiedzieć, jakie rozwiązania i technologie będą zyskiwać popularność w najbliższym czasie.
+Zobacz również:
+Data center jako strategiczny zasób biznesu
+Wsparcie w projektowaniu aplikacji biznesowych
+Zrównoważone energetycznie i inteligentne budynki istotnym elementem walki o czyste niebo
+
+Jedną z nowych technologii, która już znajduje praktyczne zastosowania, jest DCN (Data Center Networking). Dotyczy ona głównie infrastruktury sieciowej, ale buduje podwaliny dla szerszych zastosowań sztucznej inteligencji w centrach danych. Warto przypomnieć, że już w 2018 r. Google ogłosił, że systemy chłodzenia w kilku hiperskalowych centrach danych tej firmy są kontrolowane i sterowane przez oprogramowanie wykorzystujące AI, co zapewnia 40-proc. redukcję zużycia energii. To ciekawy przykład, choć na wprowadzenie takich rozwiązań w firmach mniejszych niż Google trzeba będzie jeszcze poczekać. Choć oprogramowanie wykorzystujące AI/ML i pozwalające na obsługę zdarzeń, monitorowanie stanu infrastruktury i optymalizację chłodzenia już jest dostępne na rynku, to zdaniem specjalistów minie kilka lat, zanim modele i algorytmy AI/ML zaczną oferować znacznie więcej, niż to możliwe w przypadku standardowego oprogramowania DCIM.
+
+
+
+KOMENTARZ EKSPERCKI
+Korzyści dla klientów wynikające z mechanizmów wysokiej dostępności
+
+KRZYSZTOF SIWEK, Technical Product Manager & Cloud Technical Architect, T-Mobile Polska S.A.
+Zachowanie ciągłości działania oraz mechanizmy wysokiej dostępności i Disaster Recovery są obecnie podstawą prowadzenia biznesu. Rozwiązania Data Center Networking (DCN) przyczyniają się do poprawy tego obszaru bezpieczeństwa m.in. poprzez wsparcie dla Data Center Interconnect i łączenie geograficznie odseparowanych centrów danych.
+Systemy DCN umożliwiają działanie rozwiązań Disaster Recovery bazujących na technologiach wirtualizacji i usług chmurowych. Konieczne jest do tego posiadanie wielu centrów danych, co pozwala przekierować ruch w przypadku awarii podstawowego DC do zapasowego. W potrzeby klientów związane z redundancją geograficzną wpisują się działania T-Mobile związane z budową nowych centrów danych i łączeniem ich za pomocą sieci Data Center Interconnect.
+Georedundancja w ramach rozwiązań T-Mobile realizowana jest na kilka sposobów. Pierwszym z nich jest architektura Active-Stand By, w której aktywnie wykorzystywana jest tylko jedna z lokalizacji Data Center (np. w Private Cloud), a druga znajdująca się w innym DC, np. na wirtualnej platformie współdzielonej, stanowi pozostającą w gotowości replikę. Jeżeli infrastruktura w lokalizacji podstawowej ulegnie awarii, wówczas uruchamiane są serwery wirtualne z kopią aplikacji i danych w zapasowym centrum danych. Innym rozwiązaniem jest Active-Active, w którym jednocześnie działają serwery w obydwu lokalizacjach i każda z nich jest w danej chwili wykorzystywana. Najprostszym z rozwiązań zabezpieczających przed utratą ciągłości biznesowej w przypadku katastrofy DC jest replikacja backupu do zewnętrznej lokalizacji. Bazuje na usłudze tworzenia i odtworzenia kopii zapasowej serwerów fizycznych lub maszyn wirtualnych. W przypadku usług świadczonych przez T-Mobile, jeżeli podstawowym centrum danych jest jedno z warszawskich data center, backup może znajdować się zarówno w data center w Piasecznie, jak i w Krakowie.
+Mając na uwadze potrzeby klientów, T-Mobile zwiększa liczbę dostępnych lokalizacji data center. W najbliższym czasie zostanie oddane do użytku nowe data center w Warszawie. Obiekt zrealizowany został zgodnie ze standardem ANSI/TIA 942 na wysokim poziomie rated-3 we wszystkich obszarach działania. Wszystkie systemy tego data center wyposażone zostały zgodnie z wymogami standardu w elementy nadmiarowe. Nowy obiekt będzie kolejnym, w którym będą realizowane usługi m.in. serwera dedykowanego, Wirtualnego Centrum Danych (współdzielony private cloud) oraz private cloud, w oparciu o DCN.
+Data Center Networking
+DCN (Data Center Networking) to nowy model architektury sieci w centrach danych, który ostatnio zyskuje popularność. Od modeli klasycznych różni się on przede wszystkim koncentracją na integracji wszystkich elementów infrastruktury sieciowej, takich jak: przełączniki, routery, mechanizmy równoważenia obciążenia, systemy monitoringu i analityki sieci, itp., w celu ułatwienia kontroli oraz zarządzania działaniem aplikacji, jak również przechowywanymi i przetwarzanymi w systemie danymi.
+Architektura DCN oznacza integrację zestawu różnych usług świadczonych przez centra danych. Pozwala na scentralizowane zarządzanie oraz szczegółową kontrolę działania, a także bezpieczeństwa maszyn wirtualnych, kontenerów, aplikacji i danych. DCN to specjalna sieć, która umożliwia dostarczanie zaawansowanych rozwiązań łączących wiele usług centrum danych związanych z transmisją danych i bezpieczeństwem systemu IT w zakresie dostępu do internetu, kanałów VPN, a także zapór sieciowych i systemów WAF (Web Application Firewall) przeznaczonych do ochrony aplikacji webowych. Dzięki DCN możliwe jest tworzenie rozwiązań hybrydowych łączących skierowane fizyczne zasoby firmy (hostowane lub kolokowane) z zasobami współdzielonymi (np. współdzielona pamięć masowa lub maszyny wirtualne działające w chmurze usługodawcy). DCN pozwala też na backup danych z fizycznych serwerów w modelu hostowanym lub w kolokacji.
+
+
+
+Wdrożenie architektury DCN w centrum lub centrach danych wymaga istotnej, kosztownej modernizacji infrastruktury sieciowej. Dlatego też rozwiązanie to jest wykorzystywane głównie przez duże firmy i korporacje, ale jest dostępne również dla firm mniejszych, korzystających z usług oferowanych np. przez operatorów telekomunikacyjnych, którzy wdrożyli tę technologię w swojej infrastrukturze.
+Do realizacji usługi DCN operatorzy telekomunikacyjni zwykle wykorzystują architekturę typu leaf-spine, która zapewnia skalowalność systemu sieciowego dzięki możliwości instalacji kolejnych, nowych przełączników i szybkiego podłączania do nich serwerów lub platform usługowych. W efekcie następuje ujednolicenie architektury sieciowej w centrach danych. Architektura leaf-spine wykorzystuje dwa rodzaje przełączników: leaf (skrzydło) i spine (kręgosłup). Taka dwuwarstwowa topologia przydatna jest zwłaszcza w centrach danych, gdzie panuje duży wewnętrzny ruch w systemie.
+
+
+
+Elementem DCN jest też usługa Data Center Interconnect, która umożliwia łączenie dwóch lub więcej geograficznie odseparowane centrów danych. Z jednej strony zapewnia to wysoką skalowalność, bo użytkownik może korzystać z zasobów dostępnych w wielu połączonych data centers znajdujących się w rozproszonych geograficznie ośrodkach, a z drugiej strony umożliwia dostarczanie zaawansowanych usług typu Disaster Recovery i zbudowanie odpornej na awarie infrastruktury wykorzystującej rozproszone centra danych. Data Center Interconnect umożliwia zapisywanie kopii zapasowych w zewnętrznej lokalizacji lub replikowanie backupu do kolejnych ośrodków data centers.
+Ze względu na wysoki koszt jeszcze do niedawna w rozwiązania Disaster Recovery inwestowały wyłącznie duże przedsiębiorstwa. Obecnie systemy DCN bazujące na technologiach wirtualizacji i usług chmurowych pozwoliły na znaczne obniżenie kosztów posiadania kolejnych, zapasowych centrów danych, które zapewniają ciągłość działania firm.
+
+
+
+Najczęściej wykorzystywane przez firmy usługi oferowane przez zewnętrzne data center to: kolokacja serwerów lub serwery dedykowane, udostępnienie redundantnych połączeń telekomunikacyjnych zapewniających wysoką dostępność, pamięć masowa oraz mechanizmy automatycznego tworzenia kopii zapasowych danych i aplikacji. Połączenie tych różnych usług w jeden pakiet przy wykorzystaniu architektury DCN ma też dodatkową ważną zaletę: pozwala obniżyć łączne koszty, jakie ponosi użytkownik korzystający z usług.
+Jakie są cechy nowoczesnej platformy sieciowej dla data center
+Nowoczesne, zaawansowane platformy sieciowe w centrach danych powinny pozwolić na dynamiczne dostosowanie się systemu do zmieniających się potrzeb użytkowników i aplikacji oraz dostarczać bezpieczne usługi dla aplikacji o krytycznym znaczeniu dla biznesu. Jest to możliwe dzięki wykorzystaniu mechanizmów automatyzacji standardowych procedur oraz systemu bezpieczeństwa opartego na mikrosegmentacji sieci.
+
+
+
+Oto podstawowe wymagania pozwalające na określenie platformy sieciowej wykorzystywanej w centrum danych za zgodną z najnowszymi trendami:
+Automatyzacja. Osiągnięcie wysokiego poziomu wydajności w dużej mierze zależy od zautomatyzowanego dostarczania usług sieciowych dla aplikacji. Mechanizmy pozwalające na automatyczne programowanie sieci, równoważenie obciążeń oraz dynamiczną reakcję na ich zmiany są znacznie bardziej efektywne i niezawodne niż wprowadzane ręcznie przez administratora sieci.
+
+
+
+Spójna polityka dotycząca wszystkich elementów infra¬struktury. Architektura DCN zapewnia integrację zasobów od brzegu sieci do chmury, umożliwiając konsekwentne i jednolite stosowanie zasad polityki i bezpieczeństwa we wszystkich elementach infrastruktury.
+Jeden interfejs administratora. Nowoczesne platformy DCN umożliwiają scentralizowane zarządzanie z poziomu jednej konsoli wszystkimi zasobami zarówno lokalnymi, jak i znajdującymi się w chmurze lub na brzegu sieci.
+
+
+
+Bezpieczeństwo na wysokim poziomie szczegółowości. Zintegrowane mechanizmy kontroli bezpieczeństwa, które wykorzystują mikrosegmentację sieci oraz mechanizmy kontrolne IDS/IPS.
+Globalna widoczność infrastruktury. Platformy DCN mogą wyświetlać wizualną reprezentację sieci i połączeń, co znacznie ułatwia wykrywanie, diagnozowanie i rozwiązywanie pojawiających się problemów.
+
+
+
+AI w centrach danych
+Sztuczna inteligencja może pomóc przedsiębiorstwom w tworzeniu wysoce zautomatyzowanych, bezpiecznych, samonaprawiających się centrów danych, które wymagają tylko niewielkiego udziału ludzi w zapewnieniu działania na wysokim poziomie wydajności i odporności na awarie. Automatyzacja oparta na sztucznej inteligencji może interpretować dane na poziomach wykraczających poza ludzkie możliwości, zapewniając optymalizację zużycia energii, dystrybucji obciążeń, maksymalizację wydajności i wzrost wykorzystania zasobów centrum danych. Tego typu centrów danych jeszcze nie ma, bo wciąż istnieją istotne bariery techniczne, operacyjne i kadrowe.
+Według Gartnera, dojrzałość platform AIOps, ograniczone umiejętności zarządzania nimi przez pracowników IT oraz dojrzałość operacyjna są głównymi czynnikami hamującymi zastosowania sztucznej inteligencji w centrach danych. Inną barierą jest konieczność zapewnienia wysokiej jakości danych przesyłanych do systemów AI/ML co nie jest łatwym zadaniem.
+Największą barierą są jednak ludzie. Zatrudnienie wysoko wykwalifikowanych analityków lub odpowiednie przeszkolenie pracowników IT to duże wyzwanie dla wielu przedsiębiorstw. Warto zauważyć, że ograniczenie dotychczasowych możliwości kontroli i zarządzania systemami budzi duże opory wśród pracowników. Dobrym przykładem są sterowane programowo sieci SDN. Technologia ta jest dobrze znana już od co najmniej 10 lat, a mimo to ponad trzy czwarte operacji IT jest nadal opartych na klasycznych poleceniach wykorzystujących interfejs CLI.
+
+
+
+Co daje sztuczna inteligencja?
+Wykorzystanie mechanizmów AI do zwiększenia wydajności i efektywności centrów danych dotyczy czterech głównych obszarów. We wszystkich na rynku dostępne są już rozwiązania oparte na sztucznej inteligencji, ale droga do ich integracji i stworzenia kompletnego systemu obejmującego wszystkie elementy centrum danych jest jeszcze daleka.
+Zarządzanie energią – zarządzanie energią oparte na sztucznej inteligencji może po¬móc zoptymalizować systemy ogrzewania i chłodzenia, dzięki czemu udaje się obniżyć koszty energii elektrycznej, zmniejszyć liczbę pracowników niezbędnych do obsługi systemu IT i poprawić wydajność.
+Zarządzanie sprzętem – systemy sztucznej inteligencji potrafią monitorować stan serwerów, pamięci masowych i sprzętu sieciowego, kontrolować, czy urządzenia lub oprogramowanie są prawidłowo skonfigurowane, i przewidywać, kiedy sprzęt może ulec awarii.
+Zarządzanie obciążeniami – systemy AI mogą zautomatyzować procesy przenoszenia obciążeń do najbardziej wydajnej infrastruktury w czasie rzeczywistym, zarówno wewnątrz centrum danych, jak i w środowisku chmury hybrydowej między środowiskami lokalnymi, chmurowymi i brzegowymi.
+Bezpieczeństwo – systemy oparte na sztucznej inteligencji mogą być szczególnie przydatne do wykrywania włamań w czasie rzeczywistym oraz blokowania i izolowania zagrożeń. Narzędzia wykorzystujące AI i mechanizmy uczenia maszynowego potrafią uczyć się, jak wygląda normalny ruch sieciowy, wykrywać anomalie, ustalać priorytety alertów wymagających podjęcia działania przez specjalistów ds. bezpieczeństwa, a także pomagać w analizie zdarzeń oraz przekazywać zalecenia dotyczące usuwania luk w zabezpieczeniach systemu.

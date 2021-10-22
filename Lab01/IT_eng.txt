@@ -1,0 +1,65 @@
+ITIL means Information Technology Infrastructure Library. Back in the 1980s, the British government wanted to ensure that its stakeholders would best profit from its released technology, so they published a library that grew to more than 30 volumes on items such as how to handle incidents, how to perform change management, how to maintain a service catalog and so forth.
+By 2007, this library was reduced to five systems of IT learning, known as ITIL version 3 that evolved into version 4 in February 2019. This latest version essentially tells IT companies to “do what works for you” and aligns that with a framework of best-working principles that focuses on delivering value.
+When you’re certified in ITIL4, it means you’ve mastered these best business requirements and are ready to help companies provide top value to their customers.
+Why Obtain ITIL Certification?
+ITIL is a framework for best practices in IT service management, and a good one at that. It's recognized all over the world as one of the key certifications for IT professionals. Plus, it's one of the highest paying IT certifications out there. That's because ITIL focuses on the basics that matter to business: how to improve IT services, increase productivity and cut costs.
+ITIL ensures that an IT professional knows the best practices and the best solutions in any IT service management situation. ITIL's framework helps improve IT operations no matter where the organization is in the service management life cycle, and it helps businesses by reducing costs while also improving IT services. What's more, a lot of organizations and professionals view ITIL as a sort of common language or model, which makes its related skills more transferable between organizations. (To learn about other certifications, see 6 Top Tech Certifications to Fit Your Every Need.)
+Those in IT financial management, continuity management, availability and capacity management, service-level management, and service desks stand to get the most out of ITIL training and certification. Thousands of companies all around the world – including some of the world's largest technology companies – even have this certification as a requirement.
+Want to boost your professional resume? Here's how to add ITIL certification to your job-hunting arsenal.
+
+ITIL Process Stages
+The whole onus is on providing customers with maximum value rather than just delivering services. To that end, ITIL 4 pivots its service management around five service lifecycle stages:
+Service strategy, which is the mission and vision of the organization.
+Service design, which focuses on the designs of how to accomplish that mission and vision.
+Service transition, which is where the company builds and deploys the IT service in a coordinated way.
+Service operation, where the company carries out routine tasks related to one or more projects.
+Continual service improvement, where the organization plans an incremental model for improvement from one level to the next.
+
+ITIL KPIS
+ITIL uses key performance indicators (KPIS) to track the following:
+Performance - How well does the company execute on its most important objectives?
+Bottlenecks - What is impeding the company or project’s progress and why. How can this issue be resolved?
+Progress - Namely, whether the company is accomplishing its objectives and, if not, what can be improved and how.
+Continuous improvement - Is the organization stuck in one static mode of being, or does it continually improve its service?
+
+The Four Dimensions
+These four dimensions are the ingredients needed for high-quality IT products and services. They are:
+Organizations and People, or the culture of the organization and its employees. You’ll want quality employees and a healthy culture.
+Information and Technology, namely the company's data, which is the lifeblood of the organization. This data has to be organized and secured.
+Partners and Suppliers, with the organization collaborating with its partners and suppliers.
+Value Streams and Processes, dealing with how the various parts of the organization are integrated for seamless end-to-end value.
+
+Guiding Principles of ITIL 4
+ITIL gives the company autonomy to adjust ITIL to its own persona and ends. At the same time, it suggests that companies regularly practice the following for value-based delivery:
+Focus on value.
+Start where you are.
+Progress iteratively with feedback.
+Collaborate and promote visibility.
+Think and work holistically.
+Keep it simple and practical.
+Optimize and automate.
+
+Levels of the ITIL v4 certification program
+To become a certified ITIL practitioner, you’ll need to master four different levels:
+ITIL Foundation - Entry level. This is where you acquire the Fundamentals and basic terminology of IT service management.
+ITIL Managing Professional - The logistics on managing IT projects, teams and workflows.
+ITIL Strategic Leader - Oriented for IT professionals who want the fundamentals on how IT underlies and directs business strategy.
+ITIL Master - The final level that helps ITIL v.3 experts transition to ITIL v. 4.
+
+The Test
+All Axelos Accredited Training Organizations (ATOs) offer ITIL training and the exam. Each course lasts around 2–3-days, excluding the exam, which instantly follows the training. Some ATOs give exam vouchers, allowing you to take the exam at your convenience. If you’re self-taught, you can buy those vouchers from Axelos.
+The exam itself has a passing score of 26 out of 40, with 40 multiple-choice questions to be answered in 60 minutes - or 75 minutes if English is your second language. Graduates transfer from one level to the next through a combination of work/ and or study credits. For example, an ITIL Managing Professional can qualify for testing for the ITIL Strategic Leader certification based on their previous years of experience. Strategic Leaders need at least five years of experience in leadership, managerial or higher management roles to progress to the last level.
+
+Resources
+Top organizations with ITIL v.4 certification are Udemy, Coursera, and Zoc Technologies with its more than 75 professional certifications that include ITIL 4 along with free MCQs (Multiple Choice Question) and Practice Papers, among other goodies. Visit AXELOS Certified Partner Search for a list of virtual and physical locations.
+Specialized tutorials
+ITSM Assist. ITIL customized mentoring comes with a generous selection of case histories, quizzes, summaries and mock exams. ITSM Assist has a success rate of 100%
+Publications
+Best practice sample exam papers from Axelos
+Free ITPro TV videos that thoroughly cover the test material.
+ITIL Foundation ITIL 4 from Axelos as a kindle or paperback book.
+
+Bottom Line
+ITIL is a leading IT service management framework that helps companies deliver end-to-end value from their IT products and services. The framework sets out guiding principles and processes but advises organizations to do as “you think fit” within a framework of five stages, accompanied by relevant KPIs.
+This helps ITIL flex to the different needs of diverse companies, scale to meet their growing needs and evolve to help them meet fluctuating market trends.
+If you're seeking ITIL certification, as long as you know the principles and terminology of ITIL - and job experience definitely helps - you have more than a decent chance of passing the exam.
