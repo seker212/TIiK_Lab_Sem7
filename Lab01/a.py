@@ -47,6 +47,6 @@ def save_output(char_dict: dict, char_count: int, entropy: float, base_filename:
 if __name__ == '__main__':
     for arg in argv[1:]:
         char_dict, char_count = count_chars(arg)
-        count_information(char_dict, char_count, 8)
+        count_information(char_dict, char_count, 2)
         ent = entropy(char_dict, char_count)
         save_output(char_dict, char_count, ent, arg)
