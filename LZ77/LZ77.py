@@ -68,10 +68,10 @@ class Compressor:
         logging.info('End of compression')
     
     def _block_to_bytes(self, block: Tuple[int, int, str]) -> bytes:
-        len_binstr = number_to_bitstr(block[0], SEARCH_BUFFER_BIT_SIZE)
-        offset_binstr = number_to_bitstr(block[1], LOOK_AHEAD_BUFFER_BIT_SIZE)
+        offset_binstr = number_to_bitstr(block[0], SEARCH_BUFFER_BIT_SIZE)
+        length_binstr = number_to_bitstr(block[1], LOOK_AHEAD_BUFFER_BIT_SIZE)
         char_binstr = number_to_bitstr(ord(block[2]), 8*ENCODING_CHAR_BYTE_SIZE)
-        binstr = len_binstr + offset_binstr + char_binstr
+        binstr = offset_binstr + length_binstr + char_binstr
         logging.debug('Encoded ({0}, {1}, \'{2}\') as \'{3}\''.format(block[0], block[1], block[2].replace('\n', '\\n'), binstr))
         return bytes([int(binstr[i:i+8], 2) for i in range(0, len(binstr), 8)])
 
@@ -97,13 +97,13 @@ class Decompressor:
         if len(block_lo_bin) == 0:
             logging.debug('Reached end of file')
             return None
-        lenght_offset_binstr: str = number_to_bitstr(int.from_bytes(block_lo_bin, byteorder='big', signed=False), SEARCH_BUFFER_BIT_SIZE + LOOK_AHEAD_BUFFER_BIT_SIZE)
-        logging.debug(f'Read length and offset binary: {lenght_offset_binstr}')
-        length: int = int(lenght_offset_binstr[:SEARCH_BUFFER_BIT_SIZE], 2)
-        offset: int = int(lenght_offset_binstr[SEARCH_BUFFER_BIT_SIZE:], 2)
+        offset_lenght_binstr: str = number_to_bitstr(int.from_bytes(block_lo_bin, byteorder='big', signed=False), SEARCH_BUFFER_BIT_SIZE + LOOK_AHEAD_BUFFER_BIT_SIZE)
+        logging.debug(f'Read offset and length binary: {offset_lenght_binstr}')
+        offset: int = int(offset_lenght_binstr[:SEARCH_BUFFER_BIT_SIZE], 2)
+        lenght: int = int(offset_lenght_binstr[SEARCH_BUFFER_BIT_SIZE:], 2)
         char: str = chr(int.from_bytes(self.source_file.read(ENCODING_CHAR_BYTE_SIZE), byteorder='big', signed=False))
-        logging.debug('Returning new block: ({0}, {1}, \'{2}\')'.format(length, offset, char.replace('\n', '\\n')))
-        return (length, offset, char)
+        logging.debug('Returning new block: ({0}, {1}, \'{2}\')'.format(offset, lenght, char.replace('\n', '\\n')))
+        return (offset, lenght, char)
 
     def decompress(self) -> None:
         logging.info('Starting decompression')
