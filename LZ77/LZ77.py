@@ -3,6 +3,7 @@ import os
 from io import TextIOWrapper
 import logging
 from typing import Optional, Tuple
+from sys import argv, stdout
 
 SEARCH_BUFFER_BIT_SIZE: int = 4
 LOOK_AHEAD_BUFFER_BIT_SIZE: int = 4
@@ -31,7 +32,7 @@ class Compressor:
 
     def __del__(self):
         self.source_file.close()
-        logging.debug('Compression source file closed')
+        # logging.debug('Compression source file closed')
 
     def _move_buffers(self, lenght: int) -> None:
         self.search_buffer += self.look_ahead_buffer[:lenght]
@@ -94,7 +95,7 @@ class Decompressor:
 
     def __del__(self):
         self.source_file.close()
-        logging.debug('Decompression source file closed')
+        # logging.debug('Decompression source file closed')
 
     def _move_buffer(self, value: str) -> None:
         self.search_buffer += value
@@ -139,22 +140,46 @@ class Decompressor:
 
 
 if __name__ == '__main__':
-    if os.path.exists("log.log"):
-        os.remove("log.log")
+    filesnames = {
+        'log_file': "log.log",
+        'input': "input.txt",
+        'compression_output': 'output.lz77',
+        'decompression_output': 'output.txt'
+    }
 
-    logging.basicConfig(filename='log.log', level=logging.NOTSET, format='%(levelname)s:\t%(message)s')
+    if os.path.exists(filesnames['log_file']):
+        os.remove(filesnames['log_file'])
+
+    file_handler = logging.FileHandler(filename=filesnames['log_file'])
+    file_handler.setLevel(logging.DEBUG)
+    stdout_handler = logging.StreamHandler(stdout)
+    stdout_handler.setLevel(logging.INFO)
+    handlers = [file_handler, stdout_handler]
+    logging.basicConfig(level=logging.DEBUG, format='%(levelname)s:\t%(message)s', handlers=handlers)
+
+
     if (SEARCH_BUFFER_BIT_SIZE + LOOK_AHEAD_BUFFER_BIT_SIZE) % 8 != 0:
         logging.error('Sum of buffers\' sizes isn\'t divisible by 8')
     else:
+        if '-c' in argv:
+            if not os.path.exists(filesnames['input']):
+                logging.error(f'Compression input file {filesnames["input"]} does not exist')
+            else:
+                if os.path.exists(filesnames['compression_output']):
+                    os.remove(filesnames['compression_output'])
 
-        if os.path.exists("output.lz77"):
-            os.remove("output.lz77")
+                c = Compressor(filesnames['input'], filesnames['compression_output'])
+                result = c.compress()
+        
+        if '-d' in argv:
+            if not os.path.exists(filesnames['compression_output']):
+                logging.error(f'Decompression input file {filesnames["compression_output"]} does not exist')
+            else:
+                if os.path.exists(filesnames['decompression_output']):
+                    os.remove(filesnames['decompression_output'])
+                
+                d = Decompressor(filesnames["compression_output"], filesnames['decompression_output'])
+                d.decompress()
 
-        c = Compressor('input.txt', 'output.lz77')
-        result = c.compress()
-        
-        if os.path.exists("output.txt"):
-            os.remove("output.txt")
-        
-        d = Decompressor('output.lz77', 'output.txt')
-        d.decompress()
+        if not (('-c' in argv) or ('-d' in argv)):
+            logging.error('You must provide -c or -d option.')
