@@ -17,11 +17,15 @@ def number_to_bitstr(value: int, str_len: int):
 class Compressor:
     def __init__(self, source: str, target: str) -> None:
         logging.debug('Initializing compressor')
+        with open(source, 'r') as source_file:
+            self.search_buffer: str = source_file.read(1) * (pow(2, SEARCH_BUFFER_BIT_SIZE) - 1)
+            with open(target, 'wb') as target_file:
+                binary_int = number_to_bitstr(ord(self.search_buffer[0]), 8*ENCODING_CHAR_BYTE_SIZE)
+                target_file.write(bytes([int(binary_int[i:i+8], 2) for i in range(0, len(binary_int), 8)]))
+        logging.debug('Initiated search buffer: \'{0}\' (Len: {1})'.format(self.search_buffer.replace('\n', '\\n'), len(self.search_buffer)))
         self.source_file: TextIOWrapper = open(source, 'r') #TODO: Add setting up encoding as param
         logging.debug('Compression source file opened')
         self.target = target #TODO: change target if file exists
-        self.search_buffer: str = ''
-        logging.debug('Initiated search buffer: \'{0}\' (Len: {1})'.format(self.search_buffer.replace('\n', '\\n'), len(self.search_buffer)))
         self.look_ahead_buffer: str = self.source_file.read(pow(2, LOOK_AHEAD_BUFFER_BIT_SIZE)-1)
         logging.debug('Initiated look ahead buffer: \'{0}\' (Len: {1})'.format(self.look_ahead_buffer.replace('\n', '\\n'), len(self.look_ahead_buffer)))
 
@@ -52,8 +56,8 @@ class Compressor:
                     logging.debug('Returning: (0, 0, \'{0}\'), substring_len = {1}'.format(self.look_ahead_buffer[0].replace('\n', '\\n'), substring_len))
                     return ((0, 0, self.look_ahead_buffer[0]), substring_len)
                 else:
-                    logging.debug('Returning: ({0}, {1}, \'{2}\')'.format(len(self.search_buffer)-prev_find_index, substring_len-1, self.look_ahead_buffer[substring_len-1].replace('\n', '\\n')))
-                    return ((len(self.search_buffer)-prev_find_index, substring_len-1, self.look_ahead_buffer[substring_len-1]), substring_len)
+                    logging.debug('Returning: ({0}, {1}, \'{2}\')'.format(prev_find_index, substring_len-1, self.look_ahead_buffer[substring_len-1].replace('\n', '\\n')))
+                    return ((prev_find_index, substring_len-1, self.look_ahead_buffer[substring_len-1]), substring_len)
             else:
                 logging.debug(f'Substring found. find_index= {find_index}')
     
@@ -75,12 +79,18 @@ class Compressor:
         logging.debug('Encoded ({0}, {1}, \'{2}\') as \'{3}\''.format(block[0], block[1], block[2].replace('\n', '\\n'), binstr))
         return bytes([int(binstr[i:i+8], 2) for i in range(0, len(binstr), 8)])
 
+
+#########################################################################
+#########################################################################
+
+
 class Decompressor:
     def __init__(self, source: str, target: str) -> None:
         self.source_file: TextIOWrapper = open(source, 'rb') #TODO: Add setting up encoding as param
         logging.debug('Decompression source file opened')
+        self.search_buffer: str = chr(int.from_bytes(self.source_file.read(ENCODING_CHAR_BYTE_SIZE), byteorder='big', signed=False)) * (pow(2, SEARCH_BUFFER_BIT_SIZE) - 1)
+        logging.debug('Initiated search buffer: \'{0}\' (Len: {1})'.format(self.search_buffer.replace('\n', '\\n'), len(self.search_buffer)))
         self.target = target #TODO: change target if file exists
-        self.search_buffer: str = ''
 
     def __del__(self):
         self.source_file.close()
@@ -118,7 +128,7 @@ class Decompressor:
                     logging.debug('Appended to file: \'{0}\' (Len: {1})'.format(block[2].replace('\n', '\\n'), len(block[2])))
                 self.search_buffer += block[2]
             else:
-                substring: str = self.search_buffer[len(self.search_buffer) - block[0]:len(self.search_buffer) - block[0] + block[1]]
+                substring: str = self.search_buffer[block[0]:block[0] + block[1]]
                 with open(self.target, 'a') as target_file:
                     target_file.write(substring + block[2])
                     logging.debug('Appended to file: \'{0}\' (Len: {1})'.format((substring + block[2]).replace('\n', '\\n'), len(block[2])))
