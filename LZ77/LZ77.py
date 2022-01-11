@@ -6,8 +6,9 @@ from typing import Optional, Tuple
 from sys import argv, stdout
 
 SEARCH_BUFFER_BIT_SIZE: int = 4
-LOOK_AHEAD_BUFFER_BIT_SIZE: int = 4
-ENCODING_CHAR_BYTE_SIZE: int = 2
+LOOK_AHEAD_BUFFER_BIT_SIZE: int = 3
+ENCODING_CHAR_BIT_SIZE: int = 9
+FIRST_CHAR_BIT_SIZE: int = 16
 
 def number_to_bitstr(value: int, str_len: int):
     binstr: str = "{0:08b}".format(value)[-str_len:]
@@ -18,21 +19,20 @@ def number_to_bitstr(value: int, str_len: int):
 class Compressor:
     def __init__(self, source: str, target: str) -> None:
         logging.debug('Initializing compressor')
-        with open(source, 'r') as source_file:
+        with open(source, 'r', encoding = 'utf-8') as source_file:
             self.search_buffer: str = source_file.read(1) * (pow(2, SEARCH_BUFFER_BIT_SIZE) - 1)
             with open(target, 'wb') as target_file:
-                binary_int = number_to_bitstr(ord(self.search_buffer[0]), 8*ENCODING_CHAR_BYTE_SIZE)
+                binary_int = number_to_bitstr(ord(self.search_buffer[0]), FIRST_CHAR_BIT_SIZE)
                 target_file.write(bytes([int(binary_int[i:i+8], 2) for i in range(0, len(binary_int), 8)]))
         logging.debug('Initiated search buffer: \'{0}\' (Len: {1})'.format(self.search_buffer.replace('\n', '\\n'), len(self.search_buffer)))
-        self.source_file: TextIOWrapper = open(source, 'r') #TODO: Add setting up encoding as param
+        self.source_file: TextIOWrapper = open(source, 'r', encoding='utf-8')
         logging.debug('Compression source file opened')
-        self.target = target #TODO: change target if file exists
+        self.target = target
         self.look_ahead_buffer: str = self.source_file.read(pow(2, LOOK_AHEAD_BUFFER_BIT_SIZE)-1)
         logging.debug('Initiated look ahead buffer: \'{0}\' (Len: {1})'.format(self.look_ahead_buffer.replace('\n', '\\n'), len(self.look_ahead_buffer)))
 
     def __del__(self):
         self.source_file.close()
-        # logging.debug('Compression source file closed')
 
     def _move_buffers(self, lenght: int) -> None:
         self.search_buffer += self.look_ahead_buffer[:lenght]
@@ -75,27 +75,21 @@ class Compressor:
     def _block_to_bytes(self, block: Tuple[int, int, str]) -> bytes:
         offset_binstr = number_to_bitstr(block[0], SEARCH_BUFFER_BIT_SIZE)
         length_binstr = number_to_bitstr(block[1], LOOK_AHEAD_BUFFER_BIT_SIZE)
-        char_binstr = number_to_bitstr(ord(block[2]), 8*ENCODING_CHAR_BYTE_SIZE)
+        char_binstr = number_to_bitstr(ord(block[2]), ENCODING_CHAR_BIT_SIZE)
         binstr = offset_binstr + length_binstr + char_binstr
         logging.debug('Encoded ({0}, {1}, \'{2}\') as \'{3}\''.format(block[0], block[1], block[2].replace('\n', '\\n'), binstr))
         return bytes([int(binstr[i:i+8], 2) for i in range(0, len(binstr), 8)])
 
-
-#########################################################################
-#########################################################################
-
-
 class Decompressor:
     def __init__(self, source: str, target: str) -> None:
-        self.source_file: TextIOWrapper = open(source, 'rb') #TODO: Add setting up encoding as param
+        self.source_file: TextIOWrapper = open(source, 'rb')
         logging.debug('Decompression source file opened')
-        self.search_buffer: str = chr(int.from_bytes(self.source_file.read(ENCODING_CHAR_BYTE_SIZE), byteorder='big', signed=False)) * (pow(2, SEARCH_BUFFER_BIT_SIZE) - 1)
+        self.search_buffer: str = chr(int.from_bytes(self.source_file.read(int(FIRST_CHAR_BIT_SIZE/8)), byteorder='big', signed=False)) * (pow(2, SEARCH_BUFFER_BIT_SIZE) - 1)
         logging.debug('Initiated search buffer: \'{0}\' (Len: {1})'.format(self.search_buffer.replace('\n', '\\n'), len(self.search_buffer)))
-        self.target = target #TODO: change target if file exists
+        self.target = target
 
     def __del__(self):
         self.source_file.close()
-        # logging.debug('Decompression source file closed')
 
     def _move_buffer(self, value: str) -> None:
         self.search_buffer += value
@@ -104,15 +98,15 @@ class Decompressor:
         logging.debug('Moved search buffer. Appended value: \'{0}\'. New buffer value: \'{1}\' (Len: {len(self.search_buffer)})'.replace(value.replace('\n', '\\n'), self.search_buffer.replace('\n', '\\n')))
 
     def _read_block(self) -> Optional[Tuple[int, int, str]]:
-        block_lo_bin: bytes = self.source_file.read(int((SEARCH_BUFFER_BIT_SIZE + LOOK_AHEAD_BUFFER_BIT_SIZE)/8))
+        block_lo_bin: bytes = self.source_file.read(int((SEARCH_BUFFER_BIT_SIZE + LOOK_AHEAD_BUFFER_BIT_SIZE + ENCODING_CHAR_BIT_SIZE)/8))
         if len(block_lo_bin) == 0:
             logging.debug('Reached end of file')
             return None
-        offset_lenght_binstr: str = number_to_bitstr(int.from_bytes(block_lo_bin, byteorder='big', signed=False), SEARCH_BUFFER_BIT_SIZE + LOOK_AHEAD_BUFFER_BIT_SIZE)
+        offset_lenght_binstr: str = number_to_bitstr(int.from_bytes(block_lo_bin, byteorder='big', signed=False), SEARCH_BUFFER_BIT_SIZE + LOOK_AHEAD_BUFFER_BIT_SIZE + ENCODING_CHAR_BIT_SIZE)
         logging.debug(f'Read offset and length binary: {offset_lenght_binstr}')
         offset: int = int(offset_lenght_binstr[:SEARCH_BUFFER_BIT_SIZE], 2)
-        lenght: int = int(offset_lenght_binstr[SEARCH_BUFFER_BIT_SIZE:], 2)
-        char: str = chr(int.from_bytes(self.source_file.read(ENCODING_CHAR_BYTE_SIZE), byteorder='big', signed=False))
+        lenght: int = int(offset_lenght_binstr[SEARCH_BUFFER_BIT_SIZE:SEARCH_BUFFER_BIT_SIZE + LOOK_AHEAD_BUFFER_BIT_SIZE], 2)
+        char: str = chr(int(offset_lenght_binstr[SEARCH_BUFFER_BIT_SIZE + LOOK_AHEAD_BUFFER_BIT_SIZE:], 2))
         logging.debug('Returning new block: ({0}, {1}, \'{2}\')'.format(offset, lenght, char.replace('\n', '\\n')))
         return (offset, lenght, char)
 
@@ -124,13 +118,13 @@ class Decompressor:
                 logging.info('Ending decompression')
                 break
             if block[0] == 0 and block[1] == 0:
-                with open(self.target, 'a') as target_file:
+                with open(self.target, 'a', encoding = 'utf-8') as target_file:
                     target_file.write(block[2]) 
                     logging.debug('Appended to file: \'{0}\' (Len: {1})'.format(block[2].replace('\n', '\\n'), len(block[2])))
                 self.search_buffer += block[2]
             else:
                 substring: str = self.search_buffer[block[0]:block[0] + block[1]]
-                with open(self.target, 'a') as target_file:
+                with open(self.target, 'a', encoding = 'utf-8') as target_file:
                     target_file.write(substring + block[2])
                     logging.debug('Appended to file: \'{0}\' (Len: {1})'.format((substring + block[2]).replace('\n', '\\n'), len(block[2])))
                 self.search_buffer += substring + block[2]
@@ -150,7 +144,7 @@ if __name__ == '__main__':
     if os.path.exists(filesnames['log_file']):
         os.remove(filesnames['log_file'])
 
-    file_handler = logging.FileHandler(filename=filesnames['log_file'])
+    file_handler = logging.FileHandler(filename=filesnames['log_file'], encoding='utf-8')
     file_handler.setLevel(logging.DEBUG)
     stdout_handler = logging.StreamHandler(stdout)
     stdout_handler.setLevel(logging.INFO)
@@ -158,8 +152,11 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG, format='%(levelname)s:\t%(message)s', handlers=handlers)
 
 
-    if (SEARCH_BUFFER_BIT_SIZE + LOOK_AHEAD_BUFFER_BIT_SIZE) % 8 != 0:
-        logging.error('Sum of buffers\' sizes isn\'t divisible by 8')
+
+    if (SEARCH_BUFFER_BIT_SIZE + LOOK_AHEAD_BUFFER_BIT_SIZE + ENCODING_CHAR_BIT_SIZE) % 8 != 0:
+        logging.error('Sum of buffers\' sizes and character size isn\'t divisible by 8')
+    elif (FIRST_CHAR_BIT_SIZE % 8 != 0):
+        logging.error('First character size isn\t divisible by 8')
     else:
         if '-c' in argv:
             if not os.path.exists(filesnames['input']):
